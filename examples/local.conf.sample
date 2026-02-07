@@ -1,0 +1,86 @@
+# Example local.conf additions for Ollama support
+# Add these to your build/conf/local.conf
+
+#
+# Machine Selection
+#
+# Ollama supports x86_64 and aarch64 architectures
+MACHINE ?= "qemux86-64"
+# MACHINE ?= "qemuarm64"
+
+#
+# Init Manager - Ollama requires systemd
+#
+INIT_MANAGER = "systemd"
+
+#
+# Extra Image Space for Models
+#
+# Models can be large, allocate at least 5GB extra space
+# Adjust based on your needs:
+#   - 5GB for 1-3B models
+#   - 10GB for 7B models
+#   - 20GB+ for larger models
+IMAGE_ROOTFS_EXTRA_SPACE = "5242880"
+
+#
+# Package Management (optional)
+#
+# If you want to install models after the initial build
+# PACKAGE_CLASSES ?= "package_ipk"
+# EXTRA_IMAGE_FEATURES ?= "debug-tweaks package-management"
+
+#
+# Network Configuration
+#
+# Ensure network is available for downloading models
+# DISTRO_FEATURES:append = " systemd usrmerge"
+
+#
+# Ollama Installation
+#
+# Add Ollama to your image
+IMAGE_INSTALL:append = " ollama-bin"
+
+# Or use the full packagegroup for additional utilities
+# IMAGE_INSTALL:append = " packagegroup-ollama"
+
+#
+# Optional: Development Tools
+#
+# Add if you need to debug or develop
+# IMAGE_INSTALL:append = " curl wget vim htop strace lsof"
+
+#
+# Optional: SSH Access
+#
+# Enable SSH for remote access
+# EXTRA_IMAGE_FEATURES ?= "ssh-server-openssh"
+# Or for lightweight SSH:
+# EXTRA_IMAGE_FEATURES ?= "ssh-server-dropbear"
+
+#
+# Disk Image Settings
+#
+# For QEMU testing, you may want a larger disk
+# IMAGE_FSTYPES = "ext4 wic.qcow2"
+# WKS_FILE = "qemux86-directdisk.wks"
+
+#
+# Parallel Build Configuration
+#
+# Adjust based on your host system
+BB_NUMBER_THREADS ?= "8"
+PARALLEL_MAKE ?= "-j 8"
+
+#
+# Download Directory (optional)
+#
+# Shared download directory to avoid re-downloading
+# DL_DIR ?= "${TOPDIR}/../downloads"
+
+#
+# Shared State Cache (optional)
+#
+# Shared state cache for faster rebuilds
+# SSTATE_DIR ?= "${TOPDIR}/../sstate-cache"

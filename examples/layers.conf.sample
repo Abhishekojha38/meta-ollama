@@ -1,0 +1,18 @@
+# Example layers.conf for yocto-playground with meta-ollama
+# Add this to your existing layers.conf file
+
+# Core Poky layers
+${TOPDIR}/../sources/poky/meta
+${TOPDIR}/../sources/poky/meta-poky
+${TOPDIR}/../sources/poky/meta-yocto-bsp
+
+# OpenEmbedded layers (if needed)
+# ${TOPDIR}/../sources/meta-openembedded/meta-oe
+# ${TOPDIR}/../sources/meta-openembedded/meta-python
+# ${TOPDIR}/../sources/meta-openembedded/meta-networking
+
+# Your playground layer
+${TOPDIR}/../sources/meta-playground
+
+# Ollama support layer
+${TOPDIR}/../sources/meta-ollama
