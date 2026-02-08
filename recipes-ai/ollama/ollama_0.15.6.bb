@@ -93,8 +93,8 @@ do_install() {
     install -d ${D}${sysconfdir}/systemd/system/ollama.service.d
     install -m 0644 ${UNPACKDIR}/ollama.conf ${D}${sysconfdir}/systemd/system/ollama.service.d/override.conf
 
-    # Create model storage directory
-    install -d ${D}/var/lib/ollama
+    # Set ownership and create model storage directory
+    install -d -m 0644 -o ollama -g ollama ${D}/var/lib/ollama
 }
 
 FILES:${PN} += " \
