@@ -94,7 +94,8 @@ do_install() {
     install -m 0644 ${UNPACKDIR}/ollama.conf ${D}${sysconfdir}/systemd/system/ollama.service.d/override.conf
 
     # Set ownership and create model storage directory
-    install -d -m 0644 -o ollama -g ollama ${D}/var/lib/ollama
+    install -d ${D}/var/lib/ollama
+    chown ollama:ollama ${D}/var/lib/ollama
 }
 
 FILES:${PN} += " \
